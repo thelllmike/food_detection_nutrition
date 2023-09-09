@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/25b36957-77c0-401b-aec3-10fe3eaf6889/resourceGroups/brow-group/providers/Microsoft.Web/sites/garment",
+    "appService.deploySubpath": "."
+}
