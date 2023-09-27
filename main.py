@@ -102,8 +102,13 @@ def deleteNote(id: str):
     notes = db.sql('SELECT * FROM notesapp.notes')
     return notes
 
-MODEL = tf.keras.models.load_model('./model/food.h5')
-CLASS_NAMES = ["Bread", "Dairy product", "Dessert", "Egg","Fried food", "Meat", "Noodles-Pasta", "Rice","Seafood","Soup","Vegetable-Fruit"]
+MODEL = tf.keras.models.load_model('./model/final_model.h5')
+CLASS_NAMES = ["apple_pie", "baby_back_ribs", "baklava", "cheesecake", 
+               "chicken_curry", "chicken_quesadilla", "chicken_wings", 
+               "chocolate_cake", "chocolate_mousse", "churros", "club_sandwich", 
+               "crab_cakes", "creme_brulee", "croque_madame", "cup_cakes", 
+               "deviled_eggs", "donuts", "dumplings", "eggs_benedict", 
+               "escargots", "falafel", "filet_mignon", "fish_and_chips"]
 
 @app.get("/ping")
 async def ping():
