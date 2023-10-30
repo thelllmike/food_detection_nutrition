@@ -61,19 +61,26 @@ async def predict(file: UploadFile = File(...)):
 
     predictions = MODEL.predict(img_batch)
     predicted_class = CLASS_NAMES[np.argmax(predictions[0])]
-    confidence = np.max(predictions[0])
+    confidence = np.max(predictions[0]) * 100  # multiply by 100 to convert to percentage
 
-    nutrition_info = get_nutrition_info(predicted_class)
-
-    response = {
-        'class': predicted_class,
-        'confidence': float(confidence),
-        'nutrition_info': nutrition_info
-    }
+    if confidence < 70:
+        response = {
+            'class': 'unknown object',
+            'confidence': float(confidence),
+            'nutrition_info': None
+        }
+    else:
+        nutrition_info = get_nutrition_info(predicted_class)
+        response = {
+            'class': predicted_class,
+            'confidence': float(confidence),
+            'nutrition_info': nutrition_info
+        }
 
     return response
+
 
 if __name__ == "__main__":
     #uvicorn.run(app, host='0.0.0.0', port=7000)
 
-    uvicorn.run(app, host='localhost', port=8001)
+    uvicorn.run(app, host='localhost', port=8000)
